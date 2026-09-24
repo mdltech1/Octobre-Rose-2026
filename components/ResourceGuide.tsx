@@ -84,9 +84,6 @@ export function ResourceGuide({
 
   return (
     <div className="relative isolate overflow-hidden rounded-[2.5rem] bg-deep px-4 py-14 text-on-deep sm:px-8 md:px-12 md:py-20">
-      {/* Champs de couleur diffus */}
-      <div aria-hidden="true" className="pointer-events-none absolute -right-32 -top-40 -z-10 size-[36rem] rounded-full bg-rose opacity-30 blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute -bottom-48 -left-24 -z-10 size-[28rem] rounded-full bg-terra opacity-15 blur-3xl" />
 
       <Heading
         id={`${uid}-title`}

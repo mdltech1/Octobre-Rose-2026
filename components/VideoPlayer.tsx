@@ -45,7 +45,7 @@ export function VideoPlayer({ video, priority = false }: { video: Video; priorit
       aria-label={`Regarder : ${video.title} (${languageLabel[video.language]})`}
     >
       {thumbFailed ? (
-        <span className="absolute inset-0 flex flex-col justify-start bg-[linear-gradient(135deg,var(--rose-soft),var(--surface-2))] p-4 sm:p-5">
+        <span className="absolute inset-0 flex flex-col justify-start bg-rose-soft p-4 sm:p-5">
           <span className="inline-flex items-center gap-1.5 text-xs font-medium text-rose-ink">
             <WarningCircle size={14} weight="bold" aria-hidden="true" />
             Miniature indisponible

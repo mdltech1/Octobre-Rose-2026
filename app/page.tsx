@@ -284,11 +284,7 @@ export default async function HomePage() {
 
       {/* PARTAGE */}
       <section aria-labelledby="partage-title" className="px-3 pb-8 pt-8 sm:px-5">
-        <Reveal className="relative isolate mx-auto max-w-[76rem] overflow-hidden rounded-[2.5rem] bg-rose px-6 py-16 text-center text-on-rose md:px-12 md:py-24">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-0 -z-10 size-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-on-rose opacity-15 blur-3xl"
-          />
+        <Reveal className="mx-auto max-w-[76rem] rounded-[2.5rem] bg-rose px-6 py-16 text-center text-on-rose md:px-12 md:py-24">
           <h2 id="partage-title" className="mx-auto max-w-[20ch] font-display text-4xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl">
             Une information partagée peut en encourager une autre à consulter.
           </h2>

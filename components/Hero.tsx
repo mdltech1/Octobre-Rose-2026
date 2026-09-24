@@ -15,11 +15,6 @@ export function Hero({ featured, hasWolof, nextEvent }: { featured?: Video; hasW
       aria-labelledby="hero-title"
       className="relative overflow-hidden px-4 pb-10 pt-28 sm:px-6 md:pb-24 md:pt-36"
     >
-      {/* Halo discret */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-40 -top-40 size-[34rem] rounded-full bg-rose-soft opacity-70 blur-3xl"
-      />
       <div className="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.08fr_1fr] lg:gap-14">
         <div>
           {/* Signature : le ruban se trace une fois au chargement */}

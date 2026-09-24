@@ -191,6 +191,23 @@ body {
   }
 }
 
+/* Transition entre les pages (app/template.tsx) : fondu court.
+   La transformation finale est « none » pour ne pas perturber les éléments collants (sommaire). */
+.page-enter {
+  animation: page-enter 0.35s var(--ease-out-soft) both;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Ruban rose tracé une fois au chargement (RibbonMark animated) :
    brin A (boucle), puis brin B qui passe par-dessus, avec la découpe du croisement. */
 .ribbon-draw path {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Stethoscope, Eye, Heartbeat } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, Stethoscope, Eye, Heartbeat, VideoCamera } from "@phosphor-icons/react/dist/ssr";
 import { ButtonLink } from "@/components/ButtonLink";
 import { MedicalDisclaimer } from "@/components/MedicalDisclaimer";
 import { PageHeader } from "@/components/PageHeader";
@@ -25,7 +25,7 @@ const OMS = getSourceUrl("oms-cancer-sein");
 export const revalidate = 86400;
 
 export default async function DepistagePage() {
-  const [videos, events] = await Promise.all([getVideos({ category: "depistage" }), getEvents()]);
+  const [videos, allVideos, events] = await Promise.all([getVideos({ category: "depistage" }), getVideos(), getEvents()]);
   // Événement d'ouverture : le premier de 2026 par date, qu'il soit passé ou à venir
   const campaign = [...events.past, ...events.upcoming]
     .filter((e) => e.date.startsWith("2026"))
@@ -142,6 +142,24 @@ export default async function DepistagePage() {
                   <VideoCard video={v} />
                 </li>
               ))}
+              {/* Moins de 3 vidéos : un encart complète la rangée et renvoie vers toute la bibliothèque */}
+              {videos.length < 3 ? (
+                <li className={videos.length === 1 ? "lg:col-span-2" : ""}>
+                  <div className="flex h-full flex-col justify-between gap-8 rounded-[2rem] bg-rose-soft p-7 text-rose-ink sm:p-9">
+                    <div>
+                      <VideoCamera size={30} weight="light" aria-hidden="true" />
+                      <p className="mt-5 font-display text-2xl font-semibold tracking-tight sm:text-3xl">D&apos;autres vidéos</p>
+                      <p className="mt-3 max-w-[44ch] leading-relaxed text-rose-ink/90">
+                        Des reportages sur les actions de la LISCA et des explications pédagogiques, chacune avec sa
+                        langue et sa source.
+                      </p>
+                    </div>
+                    <ButtonLink href="/videos" icon={<ArrowRight size={15} weight="bold" />} className="self-start">
+                      {`Toutes les vidéos (${allVideos.length})`}
+                    </ButtonLink>
+                  </div>
+                </li>
+              ) : null}
             </ul>
           </section>
         ) : null}

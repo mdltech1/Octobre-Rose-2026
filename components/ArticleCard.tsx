@@ -12,6 +12,8 @@ interface Props {
 
 /** Carte de fiche pédagogique, renvoie vers la section correspondante de /comprendre. */
 export function ArticleCard({ article, sourceNames, variant = "default", className }: Props) {
+  const quoteBlock = article.blocks.find((block) => block.type === "quote");
+  const quote = quoteBlock?.type === "quote" ? quoteBlock.text : null;
   return (
     <Link
       href={`/comprendre#${article.slug}`}
@@ -48,6 +50,12 @@ export function ArticleCard({ article, sourceNames, variant = "default", classNa
         >
           {article.summary}
         </p>
+        {/* Grande carte (grand écran) : la citation de la fiche occupe l'espace, avec sa source en pied de carte */}
+        {variant === "feature" && quote ? (
+          <blockquote className="mt-10 hidden max-w-[34ch] border-l-2 border-deep-accent pl-5 font-display text-2xl font-medium leading-snug tracking-tight text-paper md:block">
+            « {quote} »
+          </blockquote>
+        ) : null}
       </div>
       <div className="flex items-end justify-between gap-4">
         <span className={cn("text-xs", variant === "feature" ? "text-paper/70" : "opacity-80")}>
