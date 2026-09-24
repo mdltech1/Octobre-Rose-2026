@@ -1,4 +1,4 @@
-import { ArrowRight, VideoCamera } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, MapPin, VideoCamera } from "@phosphor-icons/react/dist/ssr";
 import { ButtonLink } from "@/components/ButtonLink";
 import { SourceBadge } from "@/components/SourceBadge";
 import { VideoPlayer } from "@/components/VideoPlayer";
@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/site";
 import type { Video } from "@/types/content";
 
 /** Héro asymétrique : message à gauche, vidéo réelle et chiffre sourcé à droite. */
-export function Hero({ featured }: { featured?: Video }) {
+export function Hero({ featured, hasWolof }: { featured?: Video; hasWolof: boolean }) {
   return (
     <section
       aria-labelledby="hero-title"
@@ -33,9 +33,16 @@ export function Hero({ featured }: { featured?: Video }) {
             <ButtonLink href="/comprendre" variant="secondary" icon={<ArrowRight size={16} weight="bold" />}>
               Comprendre
             </ButtonLink>
-            <ButtonLink href="/videos?language=wo" icon={<VideoCamera size={17} weight="fill" />}>
-              Voir les vidéos en wolof
-            </ButtonLink>
+            {/* Le lien wolof n'est proposé que si au moins une vidéo en wolof est publiée */}
+            {hasWolof ? (
+              <ButtonLink href="/videos?language=wo" icon={<VideoCamera size={17} weight="fill" />}>
+                Voir les vidéos en wolof
+              </ButtonLink>
+            ) : (
+              <ButtonLink href="/#ou-s-adresser" icon={<MapPin size={17} weight="fill" />}>
+                Où s&apos;adresser
+              </ButtonLink>
+            )}
           </div>
         </div>
 

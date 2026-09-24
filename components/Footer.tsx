@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
 import { Logo } from "@/components/Logo";
-import { mainNav, siteConfig } from "@/lib/site";
+import { mainNav, siteConfig, whatsappContactUrl } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -55,6 +55,17 @@ export default function Footer() {
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
             Conçu et développé bénévolement par {siteConfig.author.name}.
           </p>
+          <p className="mt-6 text-sm font-semibold text-ink">Signaler un événement ou une correction</p>
+          <a
+            href={whatsappContactUrl("Bonjour, je vous écris au sujet de la plateforme Octobre Rose Sénégal 2026 : ")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-rose"
+          >
+            <WhatsappLogo size={18} weight="fill" className="text-rose" aria-hidden="true" />
+            {siteConfig.contact.whatsappLabel}
+            <span className="sr-only"> (WhatsApp, nouvel onglet)</span>
+          </a>
         </div>
       </div>
       <div className="border-t border-line">

@@ -7,7 +7,8 @@ import { Reveal } from "@/components/Reveal";
 import { ShareButtons } from "@/components/ShareButtons";
 import { SourceBadge } from "@/components/SourceBadge";
 import { VideoCard } from "@/components/VideoCard";
-import { getVideos } from "@/lib/content";
+import { getEvents, getVideos } from "@/lib/content";
+import { formatLongDate } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -20,8 +21,16 @@ export const metadata = pageMetadata({
 
 const OMS = "https://www.who.int/fr/news-room/fact-sheets/detail/breast-cancer";
 
+// Régénération quotidienne : le texte sur le lancement passe du futur au passé après la date.
+export const revalidate = 86400;
+
 export default async function DepistagePage() {
-  const videos = await getVideos({ category: "depistage" });
+  const [videos, events] = await Promise.all([getVideos({ category: "depistage" }), getEvents()]);
+  // Événement d'ouverture : le premier de 2026 par date, qu'il soit passé ou à venir
+  const campaign = [...events.past, ...events.upcoming]
+    .filter((e) => e.date.startsWith("2026"))
+    .sort((a, b) => a.date.localeCompare(b.date))[0];
+  const campaignIsPast = campaign ? events.past.includes(campaign) : false;
 
   return (
     <>
@@ -100,8 +109,10 @@ export default async function DepistagePage() {
               avoir examiné plus de 3 500 femmes dans plusieurs localités du pays, selon le Ministère de la Santé.
             </p>
             <p className="mt-3 max-w-[64ch] leading-relaxed">
-              En 2026, la LISCA lance la campagne par une randonnée pédestre le dimanche 27 septembre à Dakar. Les
-              autres actions seront ajoutées à la page Événements dès leur annonce officielle.
+              {campaign
+                ? `${campaign.organizer} ${campaignIsPast ? "a ouvert" : "ouvre"} la campagne 2026 le ${formatLongDate(campaign.date)}, avec la « ${campaign.title} ». `
+                : ""}
+              Les autres actions seront ajoutées à la page Événements dès leur annonce officielle.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <ButtonLink href="/evenements" variant="secondary" icon={<ArrowRight size={15} weight="bold" />}>

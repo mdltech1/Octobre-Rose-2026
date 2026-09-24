@@ -1,10 +1,10 @@
-import { Suspense } from "react";
 import { MedicalDisclaimer } from "@/components/MedicalDisclaimer";
 import { PageHeader } from "@/components/PageHeader";
 import { ShareButtons } from "@/components/ShareButtons";
-import { VideoGridSkeleton, VideoLibrary } from "@/components/VideoLibrary";
+import { VideoLibrary } from "@/components/VideoLibrary";
 import { countVideosInReview, getVideos } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
+import { parseVideoFilters } from "@/lib/videoFilters";
 
 export const metadata = pageMetadata({
   title: "Vidéos : cancer du sein en wolof et en français",
@@ -14,8 +14,11 @@ export const metadata = pageMetadata({
   keywords: ["vidéo cancer du sein wolof", "Octobre Rose vidéo Sénégal"],
 });
 
-export default async function VideosPage() {
-  const [videos, wolofInReview] = await Promise.all([getVideos(), countVideosInReview("wo")]);
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
+
+export default async function VideosPage({ searchParams }: { searchParams: SearchParams }) {
+  const [videos, wolofInReview, params] = await Promise.all([getVideos(), countVideosInReview("wo"), searchParams]);
+  const filters = parseVideoFilters(params);
 
   return (
     <>
@@ -24,9 +27,13 @@ export default async function VideosPage() {
         intro="Des vidéos hébergées par leurs auteurs et lues directement ici. Chaque vidéo affiche sa langue et sa source. Les vidéos en wolof sont ajoutées dès qu'elles proviennent d'une source fiable."
       />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <Suspense fallback={<VideoGridSkeleton />}>
-          <VideoLibrary videos={videos} wolofInReview={wolofInReview} />
-        </Suspense>
+        {/* La clé réinitialise les filtres quand on arrive par un autre lien (ex. /videos?language=fr) */}
+        <VideoLibrary
+          key={`${filters.language}-${filters.category}-${filters.query}`}
+          videos={videos}
+          wolofInReview={wolofInReview}
+          initialFilters={filters}
+        />
 
         <div className="mt-16 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
           <MedicalDisclaimer />

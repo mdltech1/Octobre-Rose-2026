@@ -136,47 +136,26 @@ body {
   }
 }
 
-/* Grain discret, fixe et non interactif */
-.grain::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 60;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Apparition au défilement (pilotée par IntersectionObserver) */
+/* Apparition au défilement (pilotée par IntersectionObserver).
+   Visible par défaut : un bloc n'est masqué qu'une fois le JavaScript prêt, et seulement
+   s'il est encore sous l'écran. Sur réseau lent, le contenu n'est donc jamais invisible. */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  filter: blur(6px);
   transition:
-    opacity 0.9s var(--ease-out-soft),
-    transform 0.9s var(--ease-out-soft),
-    filter 0.9s var(--ease-out-soft);
+    opacity 0.8s var(--ease-out-soft),
+    transform 0.8s var(--ease-out-soft);
   transition-delay: calc(var(--reveal-index, 0) * 80ms);
 }
 
-.reveal[data-visible="true"] {
-  opacity: 1;
-  transform: none;
-  filter: none;
-}
-
-/* Sans JavaScript, tout reste visible */
-.no-js .reveal {
-  opacity: 1;
-  transform: none;
-  filter: none;
+.reveal[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(24px);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .reveal[data-visible="false"] {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
   }
   *,

@@ -8,8 +8,8 @@ import type { Event } from "@/types/content";
  * Les événements passés basculent automatiquement dans « Éditions passées ».
  */
 export const events: Event[] = [
-  // Sources : deux affiches officielles de la LISCA publiées sur LinkedIn (« J-10 » et
-  // affiche principale, transmises le 24/09/2026). Date, lieu, horaire et public repris tels qu'affichés.
+  // Source : publication LinkedIn de la LISCA (#octobrerose), vérifiée le 24/09/2026 :
+  // « 27 septembre, retrouvons-nous dès 7h30 à la Place de la Nation (ex-Place de l'Obélisque) ».
   {
     id: "event-2026-randonnee-lisca",
     title: "Randonnée pédestre de lancement d'Octobre Rose 2026",
@@ -19,8 +19,9 @@ export const events: Event[] = [
     description:
       "La LISCA lance officiellement Octobre Rose 2026 par sa randonnée pédestre annuelle. Familles, amis, entreprises, associations et institutions sont invités à marcher ensemble pour prévenir, dépister et sauver des vies. #SénégalEnRose",
     organizer: "Ligue Sénégalaise Contre le Cancer (LISCA)",
-    sourceUrl: "https://www.linkedin.com/company/ligue-senegalaise-de-lutte-contre-le-cancer/posts/",
-    sourceName: "Affiche de la LISCA publiée sur LinkedIn",
+    sourceUrl:
+      "https://www.linkedin.com/posts/ligue-senegalaise-de-lutte-contre-le-cancer_octobrerose-activity-7506488340729188352-zbYR",
+    sourceName: "Publication de la LISCA sur LinkedIn",
     status: "published",
   },
 ];

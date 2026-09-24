@@ -26,6 +26,11 @@ export default function Header() {
     if (!open) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // La page derrière le menu devient inerte : Tab reste dans l'en-tête et le menu
+    const behind = [document.querySelector("main"), document.querySelector("body > footer")].filter(
+      (el): el is HTMLElement => el instanceof HTMLElement,
+    );
+    behind.forEach((el) => (el.inert = true));
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpen(false);
@@ -36,6 +41,7 @@ export default function Header() {
     const t = window.setTimeout(() => firstLinkRef.current?.focus(), 60);
     return () => {
       document.body.style.overflow = previous;
+      behind.forEach((el) => (el.inert = false));
       document.removeEventListener("keydown", onKey);
       window.clearTimeout(t);
     };

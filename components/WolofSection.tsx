@@ -11,13 +11,34 @@ interface Props {
   frenchCount: number;
 }
 
-/** Rubrique « Comprendre en wolof » : vidéos publiées, ou état du référencement. */
+/** Rubrique « Comprendre en wolof » : vidéos publiées, ou bandeau d'attente tant qu'il n'y en a aucune. */
 export function WolofSection({ published, inReview, frenchCount }: Props) {
-  const pipeline = [
-    { verb: "Repérées", value: published.length + inReview, text: "vidéos en wolof identifiées" },
-    { verb: "En vérification", value: inReview, text: "auteur en cours d'identification" },
-    { verb: "Publiées", value: published.length, text: "vidéos de sources fiables" },
-  ];
+  // Tant qu'aucune vidéo n'est publiée : bandeau court, sans compteur à zéro
+  if (published.length === 0) {
+    return (
+      <section aria-labelledby="wolof-title" className="px-3 py-8 sm:px-5">
+        <Reveal className="mx-auto flex max-w-[76rem] flex-col gap-6 rounded-[2rem] bg-rose-soft p-6 text-rose-ink sm:p-8 md:flex-row md:items-center md:justify-between md:p-10">
+          <div className="flex gap-4 sm:gap-5">
+            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-rose text-on-rose" aria-hidden="true">
+              <VideoCamera size={24} weight="fill" />
+            </span>
+            <div>
+              <h2 id="wolof-title" className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+                Comprendre en wolof
+              </h2>
+              <p className="mt-2 max-w-[60ch] leading-relaxed text-rose-ink/90">
+                {WOLOF_EMPTY_MESSAGE}
+                {inReview > 0 ? ` ${inReview} vidéo${inReview > 1 ? "s sont" : " est"} en cours de vérification.` : ""}
+              </p>
+            </div>
+          </div>
+          <ButtonLink href="/videos?language=fr" variant="ghost" icon={<ArrowRight size={15} weight="bold" />} className="self-start md:self-auto">
+            {`Vidéos en français (${frenchCount})`}
+          </ButtonLink>
+        </Reveal>
+      </section>
+    );
+  }
 
   return (
     <section aria-labelledby="wolof-title" className="px-3 py-8 sm:px-5">
@@ -30,71 +51,36 @@ export function WolofSection({ published, inReview, frenchCount }: Props) {
           Wolof
         </span>
 
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <Reveal>
-            <span className="grid size-14 place-items-center rounded-2xl bg-rose text-on-rose" aria-hidden="true">
-              <VideoCamera size={28} weight="fill" />
-            </span>
-            <h2
-              id="wolof-title"
-              className="mt-6 font-display text-[2.6rem] font-semibold leading-[1] tracking-[-0.035em] text-rose-ink sm:text-6xl"
-            >
-              Comprendre en wolof
-            </h2>
-            <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-rose-ink/90">
-              Pour celles et ceux qui préfèrent une explication orale, dans leur langue. {published.length === 0 ? WOLOF_EMPTY_MESSAGE : ""}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="/videos?language=wo" icon={<ArrowRight size={15} weight="bold" />}>
-                La rubrique wolof
-              </ButtonLink>
-              <ButtonLink href="/videos?language=fr" variant="ghost">
-                {`En français (${frenchCount})`}
-              </ButtonLink>
-            </div>
-          </Reveal>
+        <Reveal>
+          <span className="grid size-14 place-items-center rounded-2xl bg-rose text-on-rose" aria-hidden="true">
+            <VideoCamera size={28} weight="fill" />
+          </span>
+          <h2
+            id="wolof-title"
+            className="mt-6 font-display text-[2.6rem] font-semibold leading-[1] tracking-[-0.035em] text-rose-ink sm:text-6xl"
+          >
+            Comprendre en wolof
+          </h2>
+          <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-rose-ink/90">
+            Pour celles et ceux qui préfèrent une explication orale, dans leur langue.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ButtonLink href="/videos?language=wo" icon={<ArrowRight size={15} weight="bold" />}>
+              La rubrique wolof
+            </ButtonLink>
+            <ButtonLink href="/videos?language=fr" variant="ghost">
+              {`En français (${frenchCount})`}
+            </ButtonLink>
+          </div>
+        </Reveal>
 
-          {published.length === 0 ? (
-            <Reveal index={1} className="rounded-[2rem] bg-paper/80 p-2 ring-1 ring-rose/15">
-              <div className="rounded-[1.6rem] bg-surface p-6 sm:p-7">
-                <p className="text-sm font-semibold text-ink">Où en est le référencement</p>
-                <ul className="mt-5 grid gap-4">
-                  {pipeline.map((p) => (
-                    <li key={p.verb} className="flex items-center gap-4">
-                      <span
-                        className={
-                          p.value > 0
-                            ? "grid size-14 shrink-0 place-items-center rounded-2xl bg-rose font-display text-2xl font-semibold text-on-rose tabular-nums"
-                            : "grid size-14 shrink-0 place-items-center rounded-2xl bg-surface-2 font-display text-2xl font-semibold text-ink-soft tabular-nums"
-                        }
-                      >
-                        {p.value}
-                      </span>
-                      <span>
-                        <span className="block font-display text-lg font-semibold tracking-tight text-ink">{p.verb}</span>
-                        <span className="block text-sm text-ink-soft">{p.text}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-6 border-t border-line pt-4 text-sm leading-relaxed text-ink-soft">
-                  Une vidéo n&apos;est publiée que si son auteur est identifié : institution, association reconnue ou
-                  professionnel de santé.
-                </p>
-              </div>
-            </Reveal>
-          ) : null}
-        </div>
-
-        {published.length > 0 ? (
-          <ul className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {published.slice(0, 3).map((v) => (
-              <li key={v.id}>
-                <VideoCard video={v} />
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        <ul className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {published.slice(0, 3).map((v) => (
+            <li key={v.id}>
+              <VideoCard video={v} />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

@@ -97,7 +97,7 @@ export default async function HomePage() {
         }}
       />
 
-      <Hero featured={featured} />
+      <Hero featured={featured} hasWolof={wolofVideos.length > 0} />
 
       {/* ACCESSIBILITÉ : démonstration interactive */}
       <section aria-labelledby="acces-title" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
@@ -225,7 +225,7 @@ export default async function HomePage() {
       </section>
 
       {/* OÙ S'ADRESSER, OÙ S'INFORMER : orienteur */}
-      <section aria-label="Où s'adresser, où s'informer" className="px-3 py-8 sm:px-5">
+      <section id="ou-s-adresser" aria-label="Où s'adresser, où s'informer" className="scroll-mt-24 px-3 py-8 sm:px-5">
         <Reveal className="mx-auto max-w-[76rem]">
           <ResourceGuide guides={guides} infoLinks={infoLinks} nextEvent={events.upcoming[0]} />
         </Reveal>
@@ -278,7 +278,7 @@ export default async function HomePage() {
         <Reveal className="relative isolate mx-auto max-w-[76rem] overflow-hidden rounded-[2.5rem] bg-rose px-6 py-16 text-center text-on-rose md:px-12 md:py-24">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-1/2 top-0 -z-10 size-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-on-rose opacity-15 blur-[100px]"
+            className="pointer-events-none absolute left-1/2 top-0 -z-10 size-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-on-rose opacity-15 blur-3xl"
           />
           <h2 id="partage-title" className="mx-auto max-w-[20ch] font-display text-4xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-6xl">
             Une information partagée peut en encourager une autre à consulter.

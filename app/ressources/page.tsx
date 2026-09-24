@@ -4,6 +4,7 @@ import { ResourceList } from "@/components/ResourceList";
 import { ShareButtons } from "@/components/ShareButtons";
 import { getEvents, getGuides, getInfoLinks, getResources } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
+import { siteConfig, whatsappContactUrl } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: "Ressources et contacts utiles",
@@ -38,9 +39,15 @@ export default async function RessourcesPage() {
         <div className="mt-16 rounded-[1.75rem] bg-surface p-6 ring-1 ring-line sm:p-8">
           <p className="font-display text-2xl font-semibold tracking-tight text-ink">Vous représentez un organisme ?</p>
           <p className="mt-2 max-w-[64ch] leading-relaxed text-ink-soft">
-            Pour ajouter ou corriger une ressource, contactez MdlTech via{" "}
-            <a href="https://www.mdltech.site/" target="_blank" rel="noopener noreferrer" className="font-semibold text-ink underline underline-offset-4">
-              mdltech.site
+            Pour ajouter ou corriger une ressource, écrivez sur WhatsApp au{" "}
+            <a
+              href={whatsappContactUrl("Bonjour, je souhaite ajouter ou corriger une ressource : ")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-ink underline underline-offset-4"
+            >
+              {siteConfig.contact.whatsappLabel}
+              <span className="sr-only"> (WhatsApp, nouvel onglet)</span>
             </a>{" "}
             en indiquant une source publique qui confirme les informations.
           </p>

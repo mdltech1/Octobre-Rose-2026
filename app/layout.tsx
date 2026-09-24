@@ -63,12 +63,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={`${display.variable} ${body.variable} no-js`} suppressHydrationWarning>
-      <head>
-        {/* Retire la classe no-js dès que JavaScript est disponible */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js')" }} />
-      </head>
-      <body className="grain min-h-[100dvh] antialiased">
+    <html lang="fr" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
+      <body className="min-h-[100dvh] antialiased">
         <Header />
         <main id="contenu" tabIndex={-1} className="outline-none">
           {children}

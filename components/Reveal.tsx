@@ -9,17 +9,19 @@ interface Props {
   className?: string;
 }
 
-/** Apparition douce à l'entrée dans le viewport (IntersectionObserver, sans écouteur de scroll). */
+/**
+ * Apparition douce à l'entrée dans le viewport (IntersectionObserver, sans écouteur de scroll).
+ * Le bloc est rendu visible côté serveur : il n'est masqué qu'ici, s'il est encore sous l'écran.
+ */
 export function Reveal({ children, as: Tag = "div", index = 0, className }: Props) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    if (!("IntersectionObserver" in window)) {
-      el.dataset.visible = "true";
-      return;
-    }
+    if (!el || !("IntersectionObserver" in window)) return;
+    // Déjà à l'écran (ou au-dessus) : on le laisse tel quel, sans animation
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+    el.dataset.visible = "false";
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {

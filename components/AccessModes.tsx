@@ -110,7 +110,7 @@ export function AccessModes({ signs, listenText, video, sources }: Props) {
               onKeyDown={onKeyDown}
               className={cn(
                 "group relative flex min-w-0 items-center gap-2.5 pb-4 pt-3 sm:gap-3 text-left font-display text-[1.4rem] font-semibold tracking-[-0.03em] transition-colors duration-500 sm:text-4xl lg:text-5xl",
-                selected ? "text-ink" : "text-ink-soft/45 hover:text-ink-soft",
+                selected ? "text-ink" : "text-ink-soft/70 hover:text-ink-soft",
               )}
             >
               <span

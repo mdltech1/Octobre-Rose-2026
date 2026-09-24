@@ -1,10 +1,13 @@
 import { CalendarBlank } from "@phosphor-icons/react/dist/ssr";
 import { EmptyState } from "@/components/EmptyState";
 import { EventCard } from "@/components/EventCard";
+import { JsonLd } from "@/components/JsonLd";
 import { PageHeader } from "@/components/PageHeader";
 import { ShareButtons } from "@/components/ShareButtons";
 import { getEvents } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
+import { siteConfig, whatsappContactUrl } from "@/lib/site";
+import type { Event } from "@/types/content";
 
 export const metadata = pageMetadata({
   title: "Événements Octobre Rose au Sénégal",
@@ -17,11 +20,31 @@ export const metadata = pageMetadata({
 // Régénère la page chaque jour : un événement passe automatiquement dans les éditions passées.
 export const revalidate = 86400;
 
+/** Données structurées schema.org d'un événement (résultats enrichis des moteurs de recherche). */
+function eventJsonLd(e: Event) {
+  return {
+    "@type": "Event",
+    name: e.title,
+    startDate: e.date,
+    description: e.description,
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    ...(e.location
+      ? { location: { "@type": "Place", name: e.location, address: { "@type": "PostalAddress", addressCountry: "SN" } } }
+      : {}),
+    organizer: { "@type": "Organization", name: e.organizer },
+    url: e.sourceUrl,
+  };
+}
+
 export default async function EvenementsPage() {
   const { upcoming, past } = await getEvents();
 
   return (
     <>
+      {upcoming.length ? (
+        <JsonLd data={{ "@context": "https://schema.org", "@graph": upcoming.map(eventJsonLd) }} />
+      ) : null}
       <PageHeader
         title="Événements"
         intro="Nous référençons uniquement les événements documentés par leur organisateur ou par un média identifié, avec un lien vers l'annonce."
@@ -62,11 +85,17 @@ export default async function EvenementsPage() {
             Vous organisez un événement ?
           </h2>
           <p className="mt-2 max-w-[62ch] leading-relaxed text-ink-soft">
-            Transmettez l&apos;annonce publique (site, page officielle, article de presse) via{" "}
-            <a href="https://www.mdltech.site/" target="_blank" rel="noopener noreferrer" className="font-semibold text-ink underline underline-offset-4">
-              mdltech.site
+            Transmettez le lien de l&apos;annonce publique (site, page officielle, article de presse) sur WhatsApp au{" "}
+            <a
+              href={whatsappContactUrl("Bonjour, je souhaite signaler un événement Octobre Rose : ")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-ink underline underline-offset-4"
+            >
+              {siteConfig.contact.whatsappLabel}
+              <span className="sr-only"> (WhatsApp, nouvel onglet)</span>
             </a>
-            . Elle sera ajoutée après vérification.
+            . Il sera ajouté après vérification.
           </p>
           <ShareButtons path="/evenements" className="mt-6" />
         </section>

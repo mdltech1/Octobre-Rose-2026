@@ -1,17 +1,15 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { usePathname } from "next/navigation";
+import { useCallback, useMemo, useState } from "react";
 import { ArrowCounterClockwise, FilmSlate, Hourglass } from "@phosphor-icons/react";
 import { EmptyState } from "@/components/EmptyState";
 import { VideoCard } from "@/components/VideoCard";
 import { VideoFilters, type VideoFilterState } from "@/components/VideoFilters";
 import { categoryLabel, languageLabel } from "@/lib/format";
 import { WOLOF_EMPTY_MESSAGE } from "@/lib/messages";
+import { CATS, LANGS } from "@/lib/videoFilters";
 import type { ContentCategory, LanguageCode, Video } from "@/types/content";
-
-const LANGS: LanguageCode[] = ["wo", "fr"];
-const CATS: ContentCategory[] = ["prevention", "depistage", "comprendre", "sensibilisation"];
 
 
 function normalize(s: string) {
@@ -21,37 +19,29 @@ function normalize(s: string) {
     .replace(/[̀-ͯ]/g, "");
 }
 
-function parseLanguage(v: string | null): LanguageCode | null {
-  return v && (LANGS as string[]).includes(v) ? (v as LanguageCode) : null;
-}
-function parseCategory(v: string | null): ContentCategory | null {
-  return v && (CATS as string[]).includes(v) ? (v as ContentCategory) : null;
-}
-
 interface Props {
   videos: Video[];
   wolofInReview: number;
+  initialFilters: VideoFilterState;
 }
 
-/** Bibliothèque vidéo : filtres et recherche synchronisés avec l'URL (liens partageables). */
-export function VideoLibrary({ videos, wolofInReview }: Props) {
+/**
+ * Bibliothèque vidéo : filtres et recherche synchronisés avec l'URL (liens partageables).
+ * L'état initial vient du serveur, pour que la liste figure dans le HTML dès le premier chargement.
+ */
+export function VideoLibrary({ videos, wolofInReview, initialFilters }: Props) {
   const pathname = usePathname();
-  const params = useSearchParams();
-
-  const state: VideoFilterState = {
-    language: parseLanguage(params.get("language")),
-    category: parseCategory(params.get("category")),
-    query: params.get("q") ?? "",
-  };
+  const [state, setFilters] = useState<VideoFilterState>(initialFilters);
 
   const setState = useCallback(
     (next: VideoFilterState) => {
+      setFilters(next);
       const sp = new URLSearchParams();
       if (next.language) sp.set("language", next.language);
       if (next.category) sp.set("category", next.category);
       if (next.query) sp.set("q", next.query);
       const qs = sp.toString();
-      // History API native : Next.js synchronise useSearchParams sans requête serveur.
+      // Met à jour l'URL sans requête serveur ni nouvelle entrée d'historique
       window.history.replaceState(null, "", qs ? `${pathname}?${qs}` : pathname);
     },
     [pathname],

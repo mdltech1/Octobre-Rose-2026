@@ -24,7 +24,17 @@ export const siteConfig = {
     url: "https://www.mdltech.site/",
     signature: "Des idées. Des solutions web.",
   },
+  /** Contact de la plateforme : signaler un événement, corriger une ressource. */
+  contact: {
+    whatsappLabel: "+221 76 230 14 83",
+    whatsappNumber: "221762301483",
+  },
 } as const;
+
+/** Lien WhatsApp vers le contact de la plateforme, avec un message prérempli. */
+export function whatsappContactUrl(message: string) {
+  return `https://wa.me/${siteConfig.contact.whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
 
 export const mainNav = [
   { href: "/comprendre", label: "Comprendre" },
