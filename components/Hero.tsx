@@ -11,17 +11,17 @@ export function Hero({ featured, hasWolof }: { featured?: Video; hasWolof: boole
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative overflow-hidden px-4 pb-16 pt-28 sm:px-6 md:pb-24 md:pt-36"
+      className="relative overflow-hidden px-4 pb-10 pt-28 sm:px-6 md:pb-24 md:pt-36"
     >
       {/* Halo discret */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-40 -top-40 size-[34rem] rounded-full bg-rose-soft opacity-70 blur-3xl"
       />
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.08fr_1fr] lg:gap-14">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.08fr_1fr] lg:gap-14">
         <div>
           {/* Signature : le ruban se trace une fois au chargement */}
-          <RibbonMark animated className="mb-6 h-16 w-auto text-rose sm:h-20" />
+          <RibbonMark animated className="mb-5 h-12 w-auto text-rose sm:mb-6 sm:h-20" />
           <h1 id="hero-title" className="rise font-display font-semibold tracking-[-0.04em] text-ink">
             <span className="block text-[3.1rem] leading-[0.95] sm:text-7xl lg:text-[5.4rem]">Octobre Rose 2026</span>
             <span className="mt-4 block text-2xl leading-tight tracking-[-0.02em] text-rose sm:text-3xl">
@@ -51,16 +51,12 @@ export function Hero({ featured, hasWolof }: { featured?: Video; hasWolof: boole
 
         {featured ? (
           <div className="rise rise-4 relative isolate">
-            {/* Plaques de couleur superposées (effet collage) */}
+            {/* Plaque rose décalée derrière la vidéo (grands écrans) */}
             <div
               aria-hidden="true"
-              className="absolute -inset-x-2 -bottom-4 top-8 -z-10 hidden rounded-[2.5rem] bg-rose md:-inset-x-4 md:block lg:-right-8 lg:left-10 lg:top-10 lg:-rotate-[4deg]"
+              className="absolute -z-10 hidden rounded-[2.5rem] bg-rose md:block md:-bottom-4 md:-right-4 md:left-8 md:top-8"
             />
-            <div
-              aria-hidden="true"
-              className="absolute -z-20 hidden rounded-[2.5rem] bg-deep lg:block lg:-right-2 lg:-top-6 lg:bottom-24 lg:left-24 lg:rotate-[5deg]"
-            />
-            <div className="bezel bg-paper/70 shadow-lift lg:rotate-[1.2deg]">
+            <div className="bezel bg-paper/70 shadow-lift">
               <div className="bezel-core p-2">
                 <VideoPlayer video={featured} priority />
                 <div className="flex flex-col gap-2 px-3 pb-2 pt-3.5">

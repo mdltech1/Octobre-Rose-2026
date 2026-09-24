@@ -198,9 +198,10 @@ export function ResourceGuide({
       {/* ---------- S'INFORMER ---------- */}
       <div className="mt-16 border-t border-on-deep/12 pt-12">
         <SubHeading icon={<BookOpenText size={16} weight="bold" />}>Où s&apos;informer</SubHeading>
-        <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Mobile : rangée qui défile horizontalement ; grille dès sm */}
+        <ul className="scroll-row -mx-4 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-3 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
           {infoLinks.map((l, i) => (
-            <li key={l.id}>
+            <li key={l.id} className="w-[78%] shrink-0 snap-start sm:w-auto">
               <InfoTile link={l} featured={i === 0} />
             </li>
           ))}

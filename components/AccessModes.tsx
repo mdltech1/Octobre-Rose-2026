@@ -126,7 +126,7 @@ export function AccessModes({ signs, listenText, video, sources }: Props) {
               <span
                 aria-hidden="true"
                 className={cn(
-                  "absolute inset-x-0 -bottom-px h-[3px] origin-left rounded-full bg-rose transition-transform duration-700 ease-[var(--ease-spring)]",
+                  "absolute inset-x-0 -bottom-px h-[3px] origin-left rounded-full bg-rose transition-transform duration-400 ease-[var(--ease-spring)]",
                   selected ? "scale-x-100" : "scale-x-0",
                 )}
               />

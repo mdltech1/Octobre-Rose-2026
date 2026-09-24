@@ -11,17 +11,18 @@ export function EventCard({ event, past = false }: { event: Event; past?: boolea
   return (
     <article
       aria-labelledby={`${event.id}-title`}
-      className="grid grid-cols-[auto_1fr] gap-5 rounded-[1.75rem] bg-surface p-5 ring-1 ring-line sm:gap-7 sm:p-7"
+      className="grid gap-4 rounded-[1.75rem] bg-surface p-5 ring-1 ring-line sm:grid-cols-[auto_1fr] sm:gap-7 sm:p-7"
     >
+      {/* Mobile : pastille de date en ligne au-dessus du texte ; dès sm : bloc vertical à gauche */}
       <div
         className={cn(
-          "flex w-20 flex-col items-center justify-center self-start rounded-[1.25rem] py-3 text-center sm:w-24",
+          "flex w-fit items-baseline gap-1.5 self-start rounded-2xl px-4 py-2 sm:w-24 sm:flex-col sm:items-center sm:justify-center sm:gap-0 sm:rounded-[1.25rem] sm:px-0 sm:py-3 sm:text-center",
           past ? "bg-surface-2 text-ink-soft" : "bg-rose text-on-rose",
         )}
       >
-        <span className="font-display text-3xl font-semibold leading-none tabular-nums">{day}</span>
-        <span className="mt-1 text-sm font-semibold">{month}</span>
-        <span className="text-xs opacity-80">{year}</span>
+        <span className="font-display text-2xl font-semibold leading-none tabular-nums sm:text-3xl">{day}</span>
+        <span className="text-sm font-semibold sm:mt-1">{month}</span>
+        <span className="text-sm opacity-80 sm:text-xs">{year}</span>
       </div>
       <div className="min-w-0">
         {past ? (

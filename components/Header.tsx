@@ -130,10 +130,10 @@ export default function Header() {
                 <li
                   key={item.href}
                   className={cn(
-                    "transition-all duration-700 ease-[var(--ease-spring)]",
+                    "transition-all duration-400 ease-[var(--ease-spring)]",
                     open ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
                   )}
-                  style={{ transitionDelay: open ? `${80 + i * 45}ms` : "0ms" }}
+                  style={{ transitionDelay: open ? `${40 + i * 30}ms` : "0ms" }}
                 >
                   <Link
                     ref={i === 0 ? firstLinkRef : undefined}

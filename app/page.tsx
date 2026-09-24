@@ -107,7 +107,7 @@ export default async function HomePage() {
       <Hero featured={featured} hasWolof={wolofVideos.length > 0} />
 
       {/* ACCESSIBILITÉ : démonstration interactive */}
-      <section aria-labelledby="acces-title" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+      <section aria-labelledby="acces-title" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-28">
         <Reveal>
           <h2
             id="acces-title"
@@ -126,8 +126,23 @@ export default async function HomePage() {
         </Reveal>
       </section>
 
+      {/* OÙ S'ADRESSER, OÙ S'INFORMER : orienteur */}
+      <section id="ou-s-adresser" aria-label="Où s'adresser, où s'informer" className="scroll-mt-24 px-3 py-8 sm:px-5">
+        <Reveal className="mx-auto max-w-[76rem]">
+          <ResourceGuide guides={guides} infoLinks={infoLinks} nextEvent={events.upcoming[0]} />
+        </Reveal>
+        <div className="mx-auto mt-6 flex max-w-[76rem] justify-end px-2">
+          <Link
+            href="/ressources"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-rose"
+          >
+            Toutes les ressources et contacts <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
       {/* COMPRENDRE (bento) */}
-      <section aria-labelledby="comprendre-title" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+      <section aria-labelledby="comprendre-title" className="mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-24">
         <Reveal>
           <h2 id="comprendre-title" className="font-display text-4xl font-semibold tracking-[-0.035em] text-ink sm:text-6xl">
             Comprendre, sans jargon
@@ -136,17 +151,19 @@ export default async function HomePage() {
             Des fiches courtes, chacune reliée à sa source, pour savoir de quoi on parle.
           </p>
         </Reveal>
-        <div className="mt-10 grid auto-rows-[minmax(15rem,auto)] grid-cols-1 gap-4 md:grid-cols-4">
-          {bento.map(({ a, variant, cls }, i) => (
-            <Reveal key={a!.id} index={i} className={cls}>
+        {/* Mobile : rangée qui défile horizontalement (la carte suivante dépasse pour inviter au geste).
+            Dès md : grille bento. Une seule apparition pour la rangée, pour ne pas masquer les cartes hors écran. */}
+        <Reveal className="scroll-row -mx-4 mt-8 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-3 md:mx-0 md:mt-10 md:grid md:auto-rows-[minmax(15rem,auto)] md:grid-cols-4 md:gap-4 md:overflow-visible md:px-0 md:pb-0">
+          {bento.map(({ a, variant, cls }) => (
+            <div key={a!.id} className={`w-[82%] shrink-0 snap-start md:w-auto ${cls}`}>
               <ArticleCard
                 article={a!}
                 variant={variant}
                 sourceNames={getSourcesByIds(a!.sourceIds).map((s) => s.shortName)}
               />
-            </Reveal>
+            </div>
           ))}
-        </div>
+        </Reveal>
         <div className="mt-8">
           <ButtonLink href="/comprendre" variant="ghost" icon={<ArrowRight size={15} weight="bold" />}>
             Toutes les fiches
@@ -158,23 +175,23 @@ export default async function HomePage() {
       <WolofSection published={wolofVideos} inReview={wolofInReview} frenchCount={frVideos.length} />
 
       {/* CHIFFRES SOURCÉS */}
-      <section aria-labelledby="chiffres-title" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+      <section aria-labelledby="chiffres-title" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-28">
         <Reveal>
           <h2 id="chiffres-title" className="font-display text-4xl font-semibold tracking-[-0.035em] text-ink sm:text-6xl">
             Pourquoi en parler au Sénégal
           </h2>
         </Reveal>
-        <dl className="mt-14 grid gap-12 md:grid-cols-[1.3fr_1fr_1fr] md:gap-10">
+        <dl className="mt-10 grid gap-8 md:mt-14 md:grid-cols-[1.3fr_1fr_1fr] md:gap-10">
           {stats.map((s, i) => (
             <Reveal
               key={s.value}
               index={i}
-              className={`flex flex-col border-t-2 pt-6 ${i === 0 ? "border-rose" : "border-ink/15"} ${i === 1 ? "md:mt-16" : ""} ${i === 2 ? "md:mt-32" : ""}`}
+              className={`flex flex-col border-t-2 pt-5 md:pt-6 ${i === 0 ? "border-rose" : "border-ink/15"} ${i === 1 ? "md:mt-16" : ""} ${i === 2 ? "md:mt-32" : ""}`}
             >
               <dt className="order-2 mt-4 max-w-[32ch] leading-relaxed text-ink-soft">{s.label}</dt>
               <dd
                 className={`font-display font-semibold leading-[0.9] tracking-[-0.05em] tabular-nums ${
-                  s.tone === "rose" ? "text-[5.5rem] text-rose sm:text-[7.5rem]" : "text-7xl text-ink"
+                  s.tone === "rose" ? "text-[4.5rem] text-rose sm:text-[7.5rem]" : "text-6xl text-ink sm:text-7xl"
                 }`}
               >
                 {s.value}
@@ -191,7 +208,7 @@ export default async function HomePage() {
       </section>
 
       {/* DÉPISTAGE */}
-      <section aria-labelledby="depistage-title" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+      <section aria-labelledby="depistage-title" className="mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-24">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <Reveal>
             <h2 id="depistage-title" className="font-display text-4xl font-semibold tracking-[-0.035em] text-ink sm:text-6xl">
@@ -231,23 +248,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* OÙ S'ADRESSER, OÙ S'INFORMER : orienteur */}
-      <section id="ou-s-adresser" aria-label="Où s'adresser, où s'informer" className="scroll-mt-24 px-3 py-8 sm:px-5">
-        <Reveal className="mx-auto max-w-[76rem]">
-          <ResourceGuide guides={guides} infoLinks={infoLinks} nextEvent={events.upcoming[0]} />
-        </Reveal>
-        <div className="mx-auto mt-6 flex max-w-[76rem] justify-end px-2">
-          <Link
-            href="/ressources"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-rose"
-          >
-            Toutes les ressources et contacts <ArrowUpRight size={14} weight="bold" aria-hidden="true" />
-          </Link>
-        </div>
-      </section>
-
       {/* ÉVÉNEMENTS */}
-      <section aria-labelledby="evenements-title" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+      <section aria-labelledby="evenements-title" className="mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-24">
         <Reveal>
           <h2 id="evenements-title" className="font-display text-4xl font-semibold tracking-[-0.035em] text-ink sm:text-6xl">
             Événements
