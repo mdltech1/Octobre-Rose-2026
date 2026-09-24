@@ -19,6 +19,7 @@ import {
   getGuides,
   getInfoLinks,
   getSourcesByIds,
+  getSourceUrl,
   getVideoById,
   getVideos,
 } from "@/lib/content";
@@ -27,9 +28,8 @@ import { siteConfig } from "@/lib/site";
 // Régénération quotidienne (événements à venir / passés)
 export const revalidate = 86400;
 
-const GLOBOCAN = "https://gco.iarc.who.int/media/globocan/factsheets/populations/686-senegal-fact-sheet.pdf";
-const DAKARACTU =
-  "https://www.dakaractu.com/Lisca-Octobre-Rose-2025-2-625-marcheurs-unis-contre-le-cancer-du-sein-au-Senegal_a265448.html";
+const GLOBOCAN = getSourceUrl("circ-globocan-senegal");
+const DAKARACTU = getSourceUrl("dakaractu-marche-2025");
 
 export default async function HomePage() {
   const [articles, wolofVideos, frVideos, wolofInReview, events, featured, inca, guides, infoLinks] = await Promise.all([

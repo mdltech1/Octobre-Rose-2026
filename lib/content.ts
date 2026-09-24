@@ -8,7 +8,7 @@ import { articles, faq } from "@/data/articles";
 import { events } from "@/data/events";
 import { guides, infoLinks } from "@/data/guides";
 import { resources } from "@/data/resources";
-import { sources } from "@/data/sources";
+import { sources, sourceUrl } from "@/data/sources";
 import { videos } from "@/data/videos";
 import type { ContentCategory, Event, LanguageCode, Source, Video } from "@/types/content";
 
@@ -62,6 +62,11 @@ export async function getSources() {
 
 export function getSourceById(id: string): Source | undefined {
   return sources.find((s) => s.id === id);
+}
+
+/** URL d'une source de /data/sources.ts (erreur au build si l'identifiant est inconnu). */
+export function getSourceUrl(id: string) {
+  return sourceUrl(id);
 }
 
 export function getSourcesByIds(ids: string[]): Source[] {

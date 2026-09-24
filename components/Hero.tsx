@@ -5,7 +5,7 @@ import { VideoPlayer } from "@/components/VideoPlayer";
 import { siteConfig } from "@/lib/site";
 import type { Video } from "@/types/content";
 
-/** Héro asymétrique : message à gauche, vidéo réelle et chiffre sourcé à droite. */
+/** Héro asymétrique : message à gauche, vidéo réelle à droite. */
 export function Hero({ featured, hasWolof }: { featured?: Video; hasWolof: boolean }) {
   return (
     <section
@@ -68,22 +68,6 @@ export function Hero({ featured, hasWolof }: { featured?: Video; hasWolof: boole
                 </div>
               </div>
             </div>
-
-            <figure className="relative mt-6 rounded-[1.5rem] bg-ink p-5 text-paper shadow-lift sm:max-w-xs lg:-ml-10 lg:-mt-2 lg:-rotate-2">
-              <p className="font-display text-4xl font-semibold tracking-tight tabular-nums">2 220</p>
-              <figcaption className="mt-1 text-sm leading-snug text-paper/80">
-                nouveaux cas de cancer du sein estimés par an au Sénégal.{" "}
-                <a
-                  href="https://gco.iarc.who.int/media/globocan/factsheets/populations/686-senegal-fact-sheet.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-paper underline underline-offset-4"
-                >
-                  CIRC, GLOBOCAN 2024
-                  <span className="sr-only"> (nouvel onglet)</span>
-                </a>
-              </figcaption>
-            </figure>
           </div>
         ) : null}
       </div>

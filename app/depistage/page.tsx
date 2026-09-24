@@ -7,7 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { ShareButtons } from "@/components/ShareButtons";
 import { SourceBadge } from "@/components/SourceBadge";
 import { VideoCard } from "@/components/VideoCard";
-import { getEvents, getVideos } from "@/lib/content";
+import { getEvents, getSourceUrl, getVideos } from "@/lib/content";
 import { formatLongDate } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
 
@@ -19,7 +19,7 @@ export const metadata = pageMetadata({
   keywords: ["mammographie Sénégal", "dépistage gratuit Octobre Rose Dakar"],
 });
 
-const OMS = "https://www.who.int/fr/news-room/fact-sheets/detail/breast-cancer";
+const OMS = getSourceUrl("oms-cancer-sein");
 
 // Régénération quotidienne : le texte sur le lancement passe du futur au passé après la date.
 export const revalidate = 86400;
@@ -124,7 +124,7 @@ export default async function DepistagePage() {
             </div>
             <SourceBadge
               name="Ministère de la Santé du Sénégal"
-              url="https://www.sante.gouv.sn/Actualites/octobre-rose%E2%80%99%E2%80%99-jusque-l%C3%A0-permis-d%E2%80%99examiner-plus-de-3500-femmes%E2%80%99%E2%80%99-pr%C3%A9sidente-lisca"
+              url={getSourceUrl("sante-gouv-octobre-rose-lisca")}
               className="mt-6"
             />
           </Reveal>

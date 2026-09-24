@@ -1,3 +1,4 @@
+import { sourceUrl } from "@/data/sources";
 import type { Guide, InfoLink } from "@/types/content";
 
 /**
@@ -16,7 +17,7 @@ export const guides: Guide[] = [
     quote: {
       text: "En cas de masse anormale dans le sein, même indolore, il faut consulter un médecin.",
       source: "OMS",
-      url: "https://www.who.int/fr/news-room/fact-sheets/detail/breast-cancer",
+      url: sourceUrl("oms-cancer-sein"),
     },
     resourceIds: [],
     links: [
@@ -65,7 +66,7 @@ export const infoLinks: InfoLink[] = [
     icon: "book",
     title: "Comprendre la maladie",
     description: "L'aide-mémoire de l'OMS, en français : signes, facteurs de risque, prise en charge.",
-    href: "https://www.who.int/fr/news-room/fact-sheets/detail/breast-cancer",
+    href: sourceUrl("oms-cancer-sein"),
     external: true,
     label: "OMS",
   },
@@ -74,7 +75,7 @@ export const infoLinks: InfoLink[] = [
     icon: "chart",
     title: "Les chiffres au Sénégal",
     description: "Les estimations GLOBOCAN des nouveaux cas et des décès par cancer, pays par pays.",
-    href: "https://gco.iarc.who.int/media/globocan/factsheets/populations/686-senegal-fact-sheet.pdf",
+    href: sourceUrl("circ-globocan-senegal"),
     external: true,
     label: "CIRC",
   },
@@ -83,7 +84,7 @@ export const infoLinks: InfoLink[] = [
     icon: "scan",
     title: "Le dépistage expliqué",
     description: "Des explications pédagogiques sur le dépistage. Son organisation décrite est celle de la France.",
-    href: "https://www.e-cancer.fr/",
+    href: sourceUrl("inca"),
     external: true,
     label: "INCa (France)",
   },

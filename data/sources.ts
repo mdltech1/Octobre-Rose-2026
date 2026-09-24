@@ -107,6 +107,16 @@ export const sources: Source[] = [
   },
 ];
 
+/**
+ * URL d'une source par son identifiant. Échoue au build si l'identifiant n'existe pas,
+ * pour qu'un lien ne puisse jamais diverger de la liste des sources.
+ */
+export function sourceUrl(id: string) {
+  const source = sources.find((s) => s.id === id);
+  if (!source) throw new Error(`Source inconnue : ${id}`);
+  return source.url;
+}
+
 export const sourceKindLabel: Record<Source["kind"], string> = {
   international: "Organisation internationale",
   national: "Institution nationale",
