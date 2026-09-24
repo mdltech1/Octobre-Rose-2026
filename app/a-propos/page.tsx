@@ -6,9 +6,9 @@ import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
 
 export const metadata = pageMetadata({
-  title: "À propos : une initiative indépendante de MdlTech",
+  title: "À propos : une initiative indépendante de Mame Diarra",
   description:
-    "Octobre Rose Sénégal 2026 est une initiative digitale indépendante et bénévole créée par Mame Diarra, développeuse Web Full-Stack freelance et fondatrice de MdlTech.",
+    "Octobre Rose Sénégal 2026 est une initiative digitale indépendante et bénévole créée par Mame Diarra, développeuse Web Full-Stack freelance (MdlTech).",
   path: "/a-propos",
 });
 
@@ -16,8 +16,8 @@ export default function AProposPage() {
   return (
     <>
       <PageHeader
-        title="Une initiative digitale indépendante de MdlTech"
-        intro="Cette plateforme a été créée bénévolement par Mame Diarra, développeuse Web Full-Stack freelance et fondatrice de MdlTech."
+        title="Une initiative digitale indépendante"
+        intro="Cette plateforme a été créée bénévolement par Mame Diarra, développeuse Web Full-Stack freelance, qui exerce sous le nom MdlTech."
       />
 
       <div className="mx-auto grid max-w-6xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.3fr_1fr]">
@@ -58,13 +58,13 @@ export default function AProposPage() {
               <h2 id="mdltech-title" className="font-display text-3xl font-semibold tracking-tight text-ink">
                 <span className="text-terra">MdlTech</span>
               </h2>
-              <p className="mt-1 text-ink-soft">{siteConfig.studio.signature}</p>
+              <p className="mt-1 text-ink-soft">{siteConfig.brand.signature}</p>
               <p className="mt-5 max-w-[60ch] leading-relaxed text-ink-soft">
-                MdlTech est la structure de développement web fondée par {siteConfig.author.name}. Cette plateforme est
-                une contribution bénévole à Octobre Rose, sans but commercial.
+                MdlTech est la marque sous laquelle {siteConfig.author.name} exerce comme développeuse web freelance.
+                Cette plateforme est une contribution bénévole et personnelle à Octobre Rose, sans but commercial.
               </p>
             </div>
-            <ButtonLink href={siteConfig.studio.url} external variant="ghost" icon={<ArrowUpRight size={15} weight="bold" />}>
+            <ButtonLink href={siteConfig.brand.url} external variant="ghost" icon={<ArrowUpRight size={15} weight="bold" />}>
               mdltech.site
             </ButtonLink>
           </div>

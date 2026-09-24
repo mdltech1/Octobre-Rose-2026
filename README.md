@@ -3,7 +3,7 @@
 > S'informer. Se sensibiliser. Agir.
 
 Plateforme digitale indépendante de sensibilisation au cancer du sein au Sénégal.
-Initiative bénévole de **Mame Diarra**, développeuse Web Full-Stack freelance, fondatrice de [MdlTech](https://www.mdltech.site/).
+Initiative bénévole de **Mame Diarra**, développeuse Web Full-Stack freelance, qui exerce sous sa marque [MdlTech](https://www.mdltech.site/).
 
 Cette plateforme n'est pas un service médical : elle ne pose pas de diagnostic, n'interprète pas de symptômes et ne remplace pas un professionnel de santé. Elle n'est pas le site officiel de la LISCA, du Ministère de la Santé ou d'une autre organisation.
 

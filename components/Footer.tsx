@@ -41,20 +41,21 @@ export default function Footer() {
 
         <div>
           <p className="text-sm font-semibold text-ink">Une initiative de</p>
+          <p className="mt-4 font-display text-xl font-semibold tracking-tight text-ink">{siteConfig.author.name}</p>
+          <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+            {siteConfig.author.role}, qui a conçu et développé la plateforme bénévolement.
+          </p>
           <a
-            href={siteConfig.studio.url}
+            href={siteConfig.brand.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-4 inline-flex items-center gap-2"
+            className="group mt-3 inline-flex items-center gap-1.5 text-sm"
           >
-            <span className="font-display text-xl font-semibold tracking-tight text-terra">MdlTech</span>
-            <ArrowUpRight size={16} weight="bold" className="text-terra transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-            <span className="sr-only">(site de MdlTech, nouvel onglet)</span>
+            <span className="font-semibold text-terra">{siteConfig.brand.name}</span>
+            <span className="text-ink-soft">{siteConfig.brand.signature}</span>
+            <ArrowUpRight size={14} weight="bold" className="text-terra transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+            <span className="sr-only">(site freelance de {siteConfig.author.name}, nouvel onglet)</span>
           </a>
-          <p className="mt-1 text-sm text-ink-soft">{siteConfig.studio.signature}</p>
-          <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-            Conçu et développé bénévolement par {siteConfig.author.name}.
-          </p>
           <p className="mt-6 text-sm font-semibold text-ink">Signaler un événement ou une correction</p>
           <a
             href={whatsappContactUrl("Bonjour, je vous écris au sujet de la plateforme Octobre Rose Sénégal 2026 : ")}

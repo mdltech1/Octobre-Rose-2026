@@ -93,7 +93,14 @@ export default async function HomePage() {
           url: siteConfig.url,
           inLanguage: "fr-SN",
           description: siteConfig.description,
-          publisher: { "@type": "Organization", name: siteConfig.studio.name, url: siteConfig.studio.url },
+          // Autrice et éditrice : une personne, MdlTech étant sa marque de freelance
+          publisher: {
+            "@type": "Person",
+            name: siteConfig.author.name,
+            jobTitle: siteConfig.author.role,
+            url: siteConfig.brand.url,
+            brand: { "@type": "Brand", name: siteConfig.brand.name },
+          },
         }}
       />
 

@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
   keywords: [...siteConfig.keywords],
-  authors: [{ name: siteConfig.author.name, url: siteConfig.studio.url }],
+  authors: [{ name: siteConfig.author.name, url: siteConfig.brand.url }],
   creator: siteConfig.author.name,
-  publisher: siteConfig.studio.name,
+  publisher: siteConfig.author.name,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

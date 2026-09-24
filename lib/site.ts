@@ -17,9 +17,10 @@ export const siteConfig = {
   ],
   author: {
     name: "Mame Diarra",
-    role: "Développeuse Web Full-Stack freelance, fondatrice de MdlTech",
+    role: "Développeuse Web Full-Stack freelance",
   },
-  studio: {
+  /** Marque professionnelle de freelance de l'autrice (pas une agence ni une organisation). */
+  brand: {
     name: "MdlTech",
     url: "https://www.mdltech.site/",
     signature: "Des idées. Des solutions web.",

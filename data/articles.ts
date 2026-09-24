@@ -253,7 +253,7 @@ export const faq: FaqItem[] = [
     id: "faq-officiel",
     question: "Ce site est-il le site officiel de la LISCA ou du Ministère ?",
     answer:
-      "Non. Il s'agit d'une initiative digitale indépendante et bénévole de MdlTech. Elle renvoie vers les sites officiels, sans partenariat sauf collaboration officiellement confirmée.",
+      "Non. Il s'agit d'une initiative digitale indépendante et bénévole de Mame Diarra, développeuse web freelance (MdlTech). Elle renvoie vers les sites officiels, sans partenariat sauf collaboration officiellement confirmée.",
     sourceIds: [],
   },
 ];
