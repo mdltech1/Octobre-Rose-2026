@@ -15,7 +15,7 @@ export function ListenButton({ text, label, className }: { text: string; label: 
   return (
     <button
       type="button"
-      onClick={() => toggle(text)}
+      onClick={() => toggle(text, label)}
       aria-pressed={speaking}
       className={cn(
         "inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 text-sm font-semibold transition-all duration-300 active:scale-[0.97]",

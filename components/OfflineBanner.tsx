@@ -45,7 +45,7 @@ export function OfflineBanner() {
   if (!copy || dismissed || pathname !== copy.path) return null;
 
   return (
-    <div className="fixed inset-x-3 bottom-3 z-40 mx-auto max-w-xl sm:bottom-5" role="status">
+    <div className="pointer-events-auto" role="status">
       <div className="flex items-start gap-3 rounded-[1.4rem] bg-ink p-4 text-paper shadow-lift">
         <CloudSlash size={22} weight="duotone" className="mt-0.5 shrink-0" aria-hidden="true" />
         <div className="min-w-0 flex-1 text-sm leading-relaxed">

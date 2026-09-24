@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { OfflineBanner } from "@/components/OfflineBanner";
 import { ServiceWorker } from "@/components/ServiceWorker";
+import { SpeechBar } from "@/components/SpeechBar";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -76,7 +77,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         {/* Mesure d'audience sans cookie ni donnée personnelle (Vercel Web Analytics) */}
         <Analytics />
         <ServiceWorker />
-        <OfflineBanner />
+        {/* Zone fixe en bas d'écran : lecteur audio et bandeau « version enregistrée » s'empilent */}
+        <div className="pointer-events-none fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-xl flex-col gap-2 sm:bottom-5">
+          <SpeechBar />
+          <OfflineBanner />
+        </div>
       </body>
     </html>
   );

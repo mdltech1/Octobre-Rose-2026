@@ -1,13 +1,15 @@
+import Link from "next/link";
 import { ArrowRight, MapPin, VideoCamera } from "@phosphor-icons/react/dist/ssr";
 import { ButtonLink } from "@/components/ButtonLink";
 import { RibbonMark } from "@/components/RibbonMark";
 import { SourceBadge } from "@/components/SourceBadge";
 import { VideoPlayer } from "@/components/VideoPlayer";
+import { formatLongDate } from "@/lib/format";
 import { siteConfig } from "@/lib/site";
-import type { Video } from "@/types/content";
+import type { Event, Video } from "@/types/content";
 
 /** Héro asymétrique : message à gauche, vidéo réelle à droite. */
-export function Hero({ featured, hasWolof }: { featured?: Video; hasWolof: boolean }) {
+export function Hero({ featured, hasWolof, nextEvent }: { featured?: Video; hasWolof: boolean; nextEvent?: Event }) {
   return (
     <section
       aria-labelledby="hero-title"
@@ -47,6 +49,26 @@ export function Hero({ featured, hasWolof }: { featured?: Video; hasWolof: boole
               </ButtonLink>
             )}
           </div>
+
+          {/* Prochain rendez-vous documenté (page régénérée chaque jour) */}
+          {nextEvent ? (
+            <Link
+              href="/evenements"
+              className="rise rise-4 group mt-6 flex w-fit max-w-full items-center gap-3 rounded-full bg-surface py-1.5 pl-1.5 pr-4 ring-1 ring-line shadow-soft transition-shadow hover:ring-rose/40"
+            >
+              <span className="relative grid size-9 shrink-0 place-items-center rounded-full bg-rose-soft" aria-hidden="true">
+                <span className="absolute size-2.5 rounded-full bg-rose opacity-60 motion-safe:animate-ping" />
+                <span className="size-2.5 rounded-full bg-rose" />
+              </span>
+              <span className="min-w-0 text-sm leading-snug">
+                <span className="block font-semibold text-ink first-letter:uppercase">
+                  Prochain rendez-vous : {formatLongDate(nextEvent.date)}
+                </span>
+                <span className="block truncate text-ink-soft">{nextEvent.title}</span>
+              </span>
+              <ArrowRight size={15} weight="bold" className="shrink-0 text-ink-soft transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+            </Link>
+          ) : null}
         </div>
 
         {featured ? (

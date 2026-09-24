@@ -11,7 +11,7 @@ export function ArticleSection({ article, wolofVideo }: { article: Article; wolo
   const sources = getSourcesByIds(article.sourceIds);
 
   return (
-    <section id={article.slug} aria-labelledby={`${article.slug}-title`} className="scroll-mt-28">
+    <section id={article.slug} aria-labelledby={`${article.slug}-title`} className="scroll-mt-12 lg:scroll-mt-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 id={`${article.slug}-title`} className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
           {article.title}

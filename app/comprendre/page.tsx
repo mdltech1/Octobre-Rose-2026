@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { MedicalDisclaimer } from "@/components/MedicalDisclaimer";
 import { PageHeader } from "@/components/PageHeader";
 import { ShareButtons } from "@/components/ShareButtons";
+import { TableOfContents } from "@/components/TableOfContents";
 import { getArticles, getFaq, getVideoById } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 
@@ -43,31 +44,17 @@ export default async function ComprendrePage() {
         <MedicalDisclaimer compact className="max-w-2xl" />
       </PageHeader>
 
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[15rem_1fr] lg:gap-16">
-        <nav aria-label="Sommaire" className="lg:sticky lg:top-28 lg:self-start">
-          <p className="text-sm font-semibold text-ink">Sommaire</p>
-          <ol className="scroll-row -mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0">
-            {[...articles.map((a) => ({ href: `#${a.slug}`, label: a.title })), { href: "#questions", label: "Questions fréquentes" }].map(
-              (item) => (
-                <li key={item.href} className="shrink-0">
-                  <a
-                    href={item.href}
-                    className="block rounded-full bg-surface px-3.5 py-2 text-sm font-medium text-ink-soft ring-1 ring-line transition-colors hover:text-ink lg:rounded-xl lg:bg-transparent lg:px-3 lg:ring-0 lg:hover:bg-surface"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ),
-            )}
-          </ol>
-        </nav>
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 sm:px-6 lg:grid-cols-[15rem_1fr] lg:gap-16">
+        <TableOfContents
+          items={[...articles.map((a) => ({ id: a.slug, label: a.title })), { id: "questions", label: "Questions fréquentes" }]}
+        />
 
         <div className="grid gap-16 md:gap-20">
           {withVideos.map(({ article, wolof }) => (
             <ArticleSection key={article.id} article={article} wolofVideo={wolof} />
           ))}
 
-          <section id="questions" aria-labelledby="questions-title" className="scroll-mt-28">
+          <section id="questions" aria-labelledby="questions-title" className="scroll-mt-12 lg:scroll-mt-4">
             <h2 id="questions-title" className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
               Questions fréquentes
             </h2>

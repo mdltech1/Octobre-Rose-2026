@@ -176,7 +176,7 @@ export function AccessModes({ signs, listenText, video, sources }: Props) {
                   <button
                     type="button"
                     disabled={!speech.supported}
-                    onClick={() => speech.toggle(listenText)}
+                    onClick={() => speech.toggle(listenText, "Quand consulter ? (OMS)")}
                     aria-pressed={speech.speaking}
                     className="grid size-20 shrink-0 place-items-center rounded-full bg-rose text-on-rose shadow-lift transition-transform duration-500 ease-[var(--ease-spring)] hover:scale-105 active:scale-95 disabled:opacity-40"
                   >

@@ -104,7 +104,7 @@ export default async function HomePage() {
         }}
       />
 
-      <Hero featured={featured} hasWolof={wolofVideos.length > 0} />
+      <Hero featured={featured} hasWolof={wolofVideos.length > 0} nextEvent={nextEvent} />
 
       {/* ACCESSIBILITÉ : démonstration interactive */}
       <section aria-labelledby="acces-title" className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-28">
