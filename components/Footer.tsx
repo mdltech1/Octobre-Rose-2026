@@ -1,0 +1,70 @@
+import Link from "next/link";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { Logo } from "@/components/Logo";
+import { mainNav, siteConfig } from "@/lib/site";
+
+export default function Footer() {
+  return (
+    <footer className="mt-24 border-t border-line bg-surface">
+      <div className="mx-auto max-w-6xl overflow-hidden px-4 pt-16 sm:px-6 md:pt-24">
+        <p className="pb-[0.14em] font-display text-[12.5vw] font-semibold leading-[0.9] tracking-[-0.055em] text-ink lg:text-[8rem]"
+        >
+          S&apos;informer.
+          <br />
+          Se sensibiliser.
+          <br />
+          <span className="text-rose">Agir.</span>
+        </p>
+      </div>
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div>
+          <Logo />
+          <p className="mt-5 max-w-[46ch] text-sm leading-relaxed text-ink-soft">
+            Plateforme indépendante d&apos;information sur le cancer du sein au Sénégal. Elle ne remplace pas l&apos;avis
+            d&apos;un professionnel de santé et n&apos;est pas le site officiel de la LISCA, du Ministère de la Santé ou
+            d&apos;une autre organisation.
+          </p>
+        </div>
+
+        <nav aria-label="Plan du site">
+          <p className="text-sm font-semibold text-ink">Explorer</p>
+          <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm md:grid-cols-1">
+            {mainNav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="text-ink-soft transition-colors hover:text-ink">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <p className="text-sm font-semibold text-ink">Une initiative de</p>
+          <a
+            href={siteConfig.studio.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-4 inline-flex items-center gap-2"
+          >
+            <span className="font-display text-xl font-semibold tracking-tight text-terra">MdlTech</span>
+            <ArrowUpRight size={16} weight="bold" className="text-terra transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+            <span className="sr-only">(site de MdlTech, nouvel onglet)</span>
+          </a>
+          <p className="mt-1 text-sm text-ink-soft">{siteConfig.studio.signature}</p>
+          <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+            Conçu et développé bénévolement par {siteConfig.author.name}.
+          </p>
+        </div>
+      </div>
+      <div className="border-t border-line">
+        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-xs text-ink-soft sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <p>© 2026 {siteConfig.name}. Contenus sourcés, vidéos hébergées par leurs auteurs.</p>
+          <Link href="/sources" className="font-semibold hover:text-ink">
+            Sources et vérification
+          </Link>
+        </div>
+      </div>
+    </footer>
+  );
+}
