@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { RibbonImage } from "@/lib/ribbonImage";
 
 /** Icône de l'écran d'accueil iOS (iOS arrondit lui-même les angles). */
 export const size = { width: 180, height: 180 };
@@ -12,16 +13,12 @@ export default function AppleIcon() {
           width: "100%",
           height: "100%",
           background: "#bf2c61",
-          color: "#fff8fa",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 76,
-          fontWeight: 700,
-          fontFamily: "sans-serif",
         }}
       >
-        OR
+        <RibbonImage height={112} color="#fff8fa" background="#bf2c61" />
       </div>
     ),
     size,

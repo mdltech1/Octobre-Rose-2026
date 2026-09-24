@@ -191,6 +191,36 @@ body {
   }
 }
 
+/* Ruban rose tracé une fois au chargement (RibbonMark animated) :
+   brin A (boucle), puis brin B qui passe par-dessus, avec la découpe du croisement. */
+.ribbon-draw path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.ribbon-draw .ribbon-a {
+  animation: ribbon-draw 1s var(--ease-out-soft) 0.2s forwards;
+}
+.ribbon-draw .ribbon-b {
+  animation: ribbon-draw 0.5s linear 1s forwards;
+}
+.ribbon-draw .ribbon-gap {
+  /* Synchronisée avec le passage du brin B au croisement (20 % à 45 % de sa longueur) */
+  animation: ribbon-draw 0.125s linear 1.1s forwards;
+}
+
+@keyframes ribbon-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-draw path {
+    stroke-dashoffset: 0;
+    animation: none !important;
+  }
+}
+
 /* Changement de panneau (orienteur, modes d'accès) */
 .swap-in {
   animation: swap-in 0.7s var(--ease-out-soft) both;

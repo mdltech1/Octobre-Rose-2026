@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { RibbonImage } from "@/lib/ribbonImage";
 import { siteConfig } from "@/lib/site";
 
 export const alt = `${siteConfig.name} : ${siteConfig.tagline}`;
@@ -16,6 +17,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
+          position: "relative",
           background: "#fbf8f7",
           color: "#25242a",
           fontFamily: "sans-serif",
@@ -28,15 +30,12 @@ export default function OpengraphImage() {
               height: 72,
               borderRadius: 20,
               background: "#bf2c61",
-              color: "#fff8fa",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 30,
-              fontWeight: 700,
             }}
           >
-            OR
+            <RibbonImage height={48} color="#fff8fa" background="#bf2c61" />
           </div>
           <div style={{ fontSize: 30, color: "#54525b" }}>{siteConfig.url.replace(/^https?:\/\//, "")}</div>
         </div>
@@ -46,6 +45,10 @@ export default function OpengraphImage() {
             Sénégal 2026
           </div>
           <div style={{ fontSize: 40, marginTop: 28, color: "#54525b" }}>{siteConfig.tagline}</div>
+        </div>
+        {/* Grand ruban, symbole d'Octobre Rose */}
+        <div style={{ position: "absolute", right: 96, top: 110, display: "flex" }}>
+          <RibbonImage height={400} color="#bf2c61" background="#fbf8f7" />
         </div>
         <div style={{ display: "flex", gap: 16, fontSize: 26 }}>
           {["Lire", "Écouter", "Regarder", "Vérifier la source"].map((w) => (

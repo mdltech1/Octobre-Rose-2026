@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RibbonMark } from "@/components/RibbonMark";
 
 export function Logo({ onClick }: { onClick?: () => void }) {
   return (
@@ -10,9 +11,9 @@ export function Logo({ onClick }: { onClick?: () => void }) {
     >
       <span
         aria-hidden="true"
-        className="grid size-9 place-items-center rounded-[0.8rem] bg-rose font-display text-[0.8rem] font-bold tracking-tight text-on-rose transition-transform duration-500 ease-[var(--ease-spring)] group-hover:-rotate-6"
+        className="grid size-9 place-items-center rounded-[0.8rem] bg-rose text-on-rose transition-transform duration-500 ease-[var(--ease-spring)] group-hover:-rotate-6"
       >
-        OR
+        <RibbonMark className="h-6 w-auto" gapColor="var(--rose)" />
       </span>
       <span className="flex flex-col leading-none">
         <span className="font-display text-[0.95rem] font-semibold tracking-tight text-ink">Octobre Rose</span>

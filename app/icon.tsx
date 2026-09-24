@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { RibbonImage } from "@/lib/ribbonImage";
 
 /**
  * Icônes du site et de l'application installée :
@@ -27,17 +28,13 @@ export default function Icon({ id }: { id: string }) {
           // Une icône « maskable » occupe toute la surface : Android applique sa propre forme
           borderRadius: maskable ? 0 : px / 4,
           background: "#bf2c61",
-          color: "#fff8fa",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          // Texte réduit sur l'icône maskable pour rester dans la zone sûre (80 % central)
-          fontSize: maskable ? px * 0.34 : px * 0.44,
-          fontWeight: 700,
-          fontFamily: "sans-serif",
         }}
       >
-        OR
+        {/* Ruban réduit sur l'icône maskable pour rester dans la zone sûre (80 % central) */}
+        <RibbonImage height={px * (maskable ? 0.5 : 0.68)} color="#fff8fa" background="#bf2c61" />
       </div>
     ),
     { width: px, height: px },

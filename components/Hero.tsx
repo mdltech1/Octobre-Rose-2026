@@ -1,5 +1,6 @@
 import { ArrowRight, MapPin, VideoCamera } from "@phosphor-icons/react/dist/ssr";
 import { ButtonLink } from "@/components/ButtonLink";
+import { RibbonMark } from "@/components/RibbonMark";
 import { SourceBadge } from "@/components/SourceBadge";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { siteConfig } from "@/lib/site";
@@ -19,6 +20,8 @@ export function Hero({ featured, hasWolof }: { featured?: Video; hasWolof: boole
       />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.08fr_1fr] lg:gap-14">
         <div>
+          {/* Signature : le ruban se trace une fois au chargement */}
+          <RibbonMark animated className="mb-6 h-16 w-auto text-rose sm:h-20" />
           <h1 id="hero-title" className="rise font-display font-semibold tracking-[-0.04em] text-ink">
             <span className="block text-[3.1rem] leading-[0.95] sm:text-7xl lg:text-[5.4rem]">Octobre Rose 2026</span>
             <span className="mt-4 block text-2xl leading-tight tracking-[-0.02em] text-rose sm:text-3xl">
