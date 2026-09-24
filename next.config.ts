@@ -20,7 +20,17 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["@phosphor-icons/react"],
   },
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      // Le service worker doit toujours être revérifié, pour que ses mises à jour arrivent vite
+      {
+        source: "/sw.js",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          { key: "Content-Type", value: "application/javascript; charset=utf-8" },
+        ],
+      },
+    ];
   },
 };
 
