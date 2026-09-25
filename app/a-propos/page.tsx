@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PageHeader } from "@/components/PageHeader";
@@ -75,6 +76,11 @@ export default function AProposPage() {
             Faire connaître l&apos;initiative
           </h2>
           <ShareButtons path="/" className="mt-5" />
+          <p className="mt-5 text-sm">
+            <Link href="/affiche" className="font-semibold underline underline-offset-4">
+              L&apos;affiche des signes à connaître (A4, à imprimer ou en PDF)
+            </Link>
+          </p>
         </section>
       </div>
     </>

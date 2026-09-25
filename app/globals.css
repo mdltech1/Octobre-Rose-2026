@@ -315,3 +315,51 @@ body {
     background: var(--surface) !important;
   }
 }
+
+/* ------------------------------------------------------------------
+   Impression (affiche /affiche, ou toute page imprimée) :
+   couleurs claires même en mode sombre, sans en-tête ni pied de page.
+------------------------------------------------------------------- */
+@page {
+  size: A4;
+  margin: 10mm;
+}
+
+@media print {
+  :root {
+    --paper: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f3eeed;
+    --ink: #25242a;
+    --ink-soft: #54525b;
+    --line: #e7dfdd;
+    --rose: #bf2c61;
+    --rose-soft: #fbe5ec;
+    --rose-ink: #7a1740;
+    --on-rose: #fff8fa;
+    color-scheme: light;
+  }
+  /* Garde les aplats de couleur (bandeau rose, encadrés) */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* En-tête, menu, pied de page, lien d'évitement, lecteur et bandeaux fixes */
+  body > header,
+  body > footer,
+  body > a,
+  #menu-mobile,
+  nextjs-portal,
+  .print-hidden {
+    display: none !important;
+  }
+  .page-enter,
+  .rise {
+    animation: none !important;
+  }
+  /* Les ombres « maison » ne passent pas par les utilitaires Tailwind (print:shadow-none) */
+  .shadow-soft,
+  .shadow-lift {
+    box-shadow: none !important;
+  }
+}

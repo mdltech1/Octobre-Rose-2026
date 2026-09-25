@@ -82,6 +82,17 @@ Il suffit de remplacer l'implémentation de ces fonctions par des appels API en 
 Dans `data/videos.ts`, ajouter une entrée avec `yt("video-00X", "<ID YouTube>", { ... })`.
 Vérifier l'existence et la chaîne : `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=<ID>&format=json`.
 
+### Affiche A4 (`/affiche`)
+
+La page `/affiche` se construit à partir des fiches et des ressources : elle se met à jour seule.
+Le PDF téléchargeable (`public/affiche-octobre-rose-2026.pdf`) est, lui, un fichier figé : le régénérer
+après toute modification de son contenu (signes, coordonnées de la LISCA, adresse du site) :
+
+```bash
+npm run build && npm run start   # premier terminal
+npm run affiche:pdf              # second terminal (Chrome ou Edge requis, ou variable CHROME_PATH)
+```
+
 ### Ajouter un événement
 
 Dans `data/events.ts`, avec la date ISO, l'organisateur et l'URL de l'annonce officielle. Les événements passés basculent automatiquement dans « Éditions passées » (régénération quotidienne).

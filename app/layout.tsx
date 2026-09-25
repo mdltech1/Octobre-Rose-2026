@@ -78,7 +78,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Analytics />
         <ServiceWorker />
         {/* Zone fixe en bas d'écran : lecteur audio et bandeau « version enregistrée » s'empilent */}
-        <div className="pointer-events-none fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-xl flex-col gap-2 sm:bottom-5">
+        <div className="print-hidden pointer-events-none fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-xl flex-col gap-2 sm:bottom-5">
           <SpeechBar />
           <OfflineBanner />
         </div>

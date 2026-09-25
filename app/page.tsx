@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, CalendarBlank } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, ArrowUpRight, CalendarBlank, Printer } from "@phosphor-icons/react/dist/ssr";
 import { AccessModes } from "@/components/AccessModes";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ButtonLink } from "@/components/ButtonLink";
@@ -292,6 +292,14 @@ export default async function HomePage() {
             Envoyez la plateforme à une mère, une sœur, une amie, un collègue.
           </p>
           <ShareButtons path="/" tone="rose" className="mt-10 justify-center" />
+          {/* L'affiche prolonge le partage hors écran : salle d'attente, local associatif, lieu de travail */}
+          <Link
+            href="/affiche"
+            className="mt-4 inline-flex min-h-12 items-center gap-2 rounded-full bg-on-rose px-5 text-sm font-semibold text-rose transition-transform duration-300 active:scale-[0.97]"
+          >
+            <Printer size={18} weight="bold" aria-hidden="true" />
+            L&apos;affiche des signes, à imprimer ou en PDF
+          </Link>
         </Reveal>
       </section>
     </>

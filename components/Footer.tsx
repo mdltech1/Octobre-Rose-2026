@@ -29,7 +29,7 @@ export default function Footer() {
         <nav aria-label="Plan du site">
           <p className="text-sm font-semibold text-ink">Explorer</p>
           <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm md:grid-cols-1">
-            {mainNav.map((item) => (
+            {[...mainNav, { href: "/affiche", label: "Affiche (A4, PDF)" }].map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="text-ink-soft transition-colors hover:text-ink">
                   {item.label}
