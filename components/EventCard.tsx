@@ -1,4 +1,5 @@
-import { ArrowUpRight, Clock, MapPin, UsersThree } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, CalendarPlus, Clock, GoogleLogo, MapPin, UsersThree } from "@phosphor-icons/react/dist/ssr";
+import { calendarFilePath, googleCalendarUrl } from "@/lib/calendar";
 import { cn, formatLongDate } from "@/lib/format";
 import type { Event } from "@/types/content";
 
@@ -79,6 +80,31 @@ export function EventCard({ event, past = false }: { event: Event; past?: boolea
           <ArrowUpRight size={13} weight="bold" aria-hidden="true" />
           <span className="sr-only"> (nouvel onglet)</span>
         </a>
+
+        {/* Événement à venir : l'ajouter à son agenda (journée entière, rappel la veille) */}
+        {!past ? (
+          <div className="mt-5 flex flex-wrap gap-2">
+            <a
+              href={calendarFilePath(event)}
+              download
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-rose px-4 text-sm font-semibold text-on-rose transition-all duration-300 hover:bg-rose-strong active:scale-[0.97]"
+            >
+              <CalendarPlus size={18} weight="bold" aria-hidden="true" />
+              Ajouter à l&apos;agenda
+              <span className="sr-only"> (fichier .ics, avec rappel la veille)</span>
+            </a>
+            <a
+              href={googleCalendarUrl(event)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-surface px-4 text-sm font-semibold text-ink ring-1 ring-line transition-all duration-300 hover:ring-ink/30 active:scale-[0.97]"
+            >
+              <GoogleLogo size={17} weight="bold" aria-hidden="true" />
+              Google Agenda
+              <span className="sr-only"> (nouvel onglet)</span>
+            </a>
+          </div>
+        ) : null}
       </div>
     </article>
   );
