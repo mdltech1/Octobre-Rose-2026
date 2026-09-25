@@ -208,6 +208,25 @@ body {
   }
 }
 
+/* Fiche ouverte par son lien (ex. /comprendre#signes-et-symptomes partagé sur WhatsApp) :
+   son en-tête s'éclaire brièvement pour signaler « vous êtes ici ». */
+section[id]:target > :first-child {
+  border-radius: 1rem;
+  /* Démarre après le défilement doux jusqu'à la fiche */
+  animation: target-flash 2.4s var(--ease-out-soft) 0.9s both;
+}
+
+@keyframes target-flash {
+  from {
+    background: var(--rose-soft);
+    box-shadow: 0 0 0 0.75rem var(--rose-soft);
+  }
+  to {
+    background: transparent;
+    box-shadow: 0 0 0 0.75rem transparent;
+  }
+}
+
 /* Ruban rose tracé une fois au chargement (RibbonMark animated) :
    brin A (boucle), puis brin B qui passe par-dessus, avec la découpe du croisement. */
 .ribbon-draw path {

@@ -1,14 +1,17 @@
 import Link from "next/link";
-import { Quotes, VideoCamera, XCircle, CheckCircle } from "@phosphor-icons/react/dist/ssr";
+import { Quotes, VideoCamera, WhatsappLogo, XCircle, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import { ListenButton } from "@/components/ListenButton";
 import { SourceBadge } from "@/components/SourceBadge";
 import { articleToPlainText } from "@/lib/articles";
 import { getSourceById, getSourcesByIds } from "@/lib/content";
+import { absoluteUrl } from "@/lib/site";
 import type { Article, Video } from "@/types/content";
 
 /** Fiche complète affichée sur /comprendre. */
 export function ArticleSection({ article, wolofVideo }: { article: Article; wolofVideo?: Video }) {
   const sources = getSourcesByIds(article.sourceIds);
+  // Partage de cette fiche seule : le lien ouvre directement sa section sur /comprendre
+  const shareText = [article.title, article.summary, absoluteUrl(`/comprendre#${article.slug}`)].join("\n");
 
   return (
     <section id={article.slug} aria-labelledby={`${article.slug}-title`} className="scroll-mt-12 lg:scroll-mt-4">
@@ -16,7 +19,19 @@ export function ArticleSection({ article, wolofVideo }: { article: Article; wolo
         <h2 id={`${article.slug}-title`} className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
           {article.title}
         </h2>
-        <ListenButton text={articleToPlainText(article)} label={article.title} />
+        <div className="flex flex-wrap items-center gap-2">
+          <ListenButton text={articleToPlainText(article)} label={article.title} />
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent(shareText)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-10 items-center gap-2 rounded-full bg-surface-2 px-3.5 text-sm font-semibold text-ink transition-all duration-300 hover:bg-rose-soft hover:text-rose-ink active:scale-[0.97]"
+          >
+            <WhatsappLogo size={16} weight="fill" aria-hidden="true" />
+            Partager
+            <span className="sr-only"> la fiche « {article.title} » sur WhatsApp (nouvel onglet)</span>
+          </a>
+        </div>
       </div>
       <p className="mt-3 max-w-[62ch] text-lg leading-relaxed text-ink-soft">{article.summary}</p>
 
